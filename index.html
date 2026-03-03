@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zeytin Ağacı Kafe</title>
+  <meta name="description" content="Zeytin Ağacı Kafe — Kahve ile başlar, fikirle büyür." />
+  <style>
+:root{
+  --za-bg-0:#0f2622; --za-bg-1:#142f2a; --za-bg-2:#1b3b35;
+  --za-gold:#a38b63; --za-gold-2:#c4b08a;
+  --za-text:#eef5f2; --za-muted:rgba(238,245,242,.75);
+  --za-card:rgba(255,255,255,.04);
+  --za-radius:18px; --za-shadow:0 18px 40px rgba(0,0,0,.35);
+  --za-max:1120px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--za-bg-0)}
+.za-wrap{
+  background: radial-gradient(1200px 800px at 20% 10%, var(--za-bg-2), transparent 60%),
+              radial-gradient(900px 700px at 85% 15%, rgba(163,139,99,.10), transparent 55%),
+              linear-gradient(180deg, var(--za-bg-0), var(--za-bg-1));
+  color:var(--za-text);
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  overflow:hidden;
+  min-height: 100vh;
+  padding-bottom: 64px; /* space for bottom strip */
+}
+.za-container{width:min(var(--za-max),calc(100% - 40px));margin:0 auto}
+.za-header{position:relative;padding-bottom:70px;border-bottom:1px solid rgba(255,255,255,.06)}
+.za-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+.za-nav{
+  width:min(var(--za-max),calc(100% - 40px));margin:0 auto;padding:18px 0;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(10px);
+  background:linear-gradient(180deg, rgba(15,38,34,.85), rgba(15,38,34,.45));
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.za-brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--za-text);letter-spacing:.14em;font-weight:800}
+.za-brand-text{font-size:16px}
+.za-dot{width:10px;height:10px;border-radius:999px;background:var(--za-gold);box-shadow:0 0 0 5px rgba(163,139,99,.18)}
+.za-links{display:flex;align-items:center;gap:18px}
+.za-links a{color:var(--za-muted);text-decoration:none;font-weight:650;font-size:14px;padding:8px 10px;border-radius:12px;transition:.2s}
+.za-links a:hover{color:var(--za-text);background:rgba(255,255,255,.05)}
+.za-burger{display:none;background:transparent;border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:10px;cursor:pointer}
+.za-burger span{display:block;width:22px;height:2px;background:rgba(238,245,242,.9);margin:4px 0}
+.za-hero{
+  width:min(var(--za-max),calc(100% - 40px));margin:0 auto;padding:44px 0 10px;
+  display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center
+}
+.za-kicker{color:rgba(196,176,138,.95);letter-spacing:.12em;text-transform:uppercase;font-size:12px;margin:0 0 10px}
+.za-title{font-size:clamp(34px,4vw,54px);line-height:1.05;margin:0 0 12px;letter-spacing:.02em}
+.za-subtitle{margin:0 0 18px;color:var(--za-muted);font-size:16px;line-height:1.7;max-width:58ch}
+.za-cta{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 12px}
+.za-btn{
+  display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
+  border-radius:14px;padding:12px 16px;font-weight:800;border:1px solid rgba(255,255,255,.14);
+  transition:.22s;cursor:pointer;user-select:none
+}
+.za-btn-primary{background:linear-gradient(135deg, rgba(163,139,99,.95), rgba(196,176,138,.9));color:#10241f;border-color:rgba(163,139,99,.55);box-shadow:0 16px 30px rgba(0,0,0,.30)}
+.za-btn-primary:hover{transform:translateY(-1px);filter:brightness(1.03)}
+.za-btn-ghost{background:rgba(255,255,255,.04);color:var(--za-text)}
+.za-btn-ghost:hover{background:rgba(255,255,255,.07);transform:translateY(-1px)}
+.za-btn-wide{width:100%}
+.za-badges{display:flex;gap:10px;flex-wrap:wrap}
+.za-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 10px;border-radius:999px;
+  border:1px solid rgba(163,139,99,.25);
+  background:rgba(255,255,255,.03);
+  color:rgba(238,245,242,.85);
+  font-size:12px;font-weight:750;letter-spacing:.06em;
+}
+.za-logo-card{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));border:1px solid rgba(163,139,99,.22);border-radius:22px;padding:22px;box-shadow:var(--za-shadow)}
+.za-logo{width:100%;max-width:420px;display:block;margin:0 auto;border-radius:18px;border:1px solid rgba(255,255,255,.08)}
+.za-logo-caption{margin:14px 0 0;text-align:center;color:rgba(196,176,138,.95);letter-spacing:.12em;font-size:12px;text-transform:uppercase}
+
+.za-section{padding:70px 0}
+.za-section-head h2{margin:0 0 10px;font-size:30px;letter-spacing:.02em}
+.za-section-head p{margin:0 0 22px;color:var(--za-muted);max-width:72ch;line-height:1.7}
+
+.za-menu-toolbar{display:flex;flex-wrap:wrap;gap:10px;margin: 0 0 16px}
+.za-tab{
+  border-radius: 999px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.04);
+  color: rgba(238,245,242,.90);
+  font-weight: 850;
+  cursor: pointer;
+  transition: .2s;
+}
+.za-tab:hover{transform: translateY(-1px); background: rgba(255,255,255,.06)}
+.za-tab[aria-selected="true"]{
+  background: rgba(163,139,99,.18);
+  border-color: rgba(196,176,138,.45);
+  color: rgba(238,245,242,.98);
+}
+
+.za-menu-content{display:grid;grid-template-columns: repeat(2, 1fr);gap:16px}
+.za-block{
+  background: var(--za-card);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--za-radius);
+  overflow: hidden;
+  box-shadow: 0 16px 32px rgba(0,0,0,.22);
+}
+.za-block-head{
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.za-block-head h3{margin:0;font-size:16px;letter-spacing:.02em}
+.za-block-head span{color: rgba(196,176,138,.95); font-weight: 900; font-size: 12px; letter-spacing:.1em; text-transform: uppercase}
+.za-lines{padding: 8px 16px 14px}
+.za-line{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding: 10px 0;border-bottom:1px dashed rgba(255,255,255,.10)}
+.za-line:last-child{border-bottom:none}
+.za-item{font-weight: 800}
+.za-desc{margin-top:6px;color: rgba(238,245,242,.70);font-size: 12px;line-height:1.5}
+.za-price{white-space:nowrap;font-weight: 900;color: rgba(238,245,242,.92)}
+.za-price small{opacity:.75;font-weight:800}
+
+.za-menu-gallery{margin-top: 28px}
+.za-gallery-head h3{margin:0 0 8px;font-size:18px;letter-spacing:.02em}
+.za-gallery-head p{margin:0 0 14px;color:var(--za-muted);line-height:1.6}
+.za-gallery{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:14px;
+}
+
+.za-shot{
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px;
+  padding: 10px;
+  transition: .2s;
+}
+.za-shot:hover{transform: translateY(-2px); border-color: rgba(196,176,138,.35)}
+
+.za-shot img{width:100%;height:auto;display:block;border-radius:14px;border:1px solid rgba(255,255,255,.08)}
+.za-shot figcaption{margin-top:10px;color: rgba(238,245,242,.70);font-size: 12px;letter-spacing:.06em;text-transform: uppercase;text-align:center}
+
+.za-note{margin-top:18px;padding:14px;border-radius:16px;border:1px solid rgba(163,139,99,.22);background:rgba(163,139,99,.08);color:rgba(238,245,242,.92);line-height:1.6}
+
+.za-form-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:start}
+.za-form,.za-aside{background:var(--za-card);border:1px solid rgba(255,255,255,.08);border-radius:var(--za-radius);padding:18px}
+.za-field{margin-bottom:14px}
+.za-field label{display:block;margin:0 0 8px;font-weight:850;letter-spacing:.02em}
+.za-field input{width:100%;border-radius:14px;padding:12px;border:1px solid rgba(255,255,255,.12);background:rgba(10,18,16,.35);color:var(--za-text);outline:none}
+.za-field input:focus{border-color:rgba(196,176,138,.55);box-shadow:0 0 0 5px rgba(163,139,99,.15)}
+.za-help{display:block;margin-top:8px;color:rgba(238,245,242,.65);font-size:12px;line-height:1.5}
+.za-form-note{margin:12px 0 0;color:rgba(238,245,242,.65);line-height:1.6;font-size:13px}
+.za-aside p{margin:0 0 10px;color:var(--za-muted);line-height:1.7}
+.za-contact{display:block;text-decoration:none;padding:10px 12px;border-radius:14px;margin:10px 0;color:rgba(238,245,242,.92);border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04);transition:.2s;font-weight:850}
+.za-contact:hover{transform:translateY(-1px);border-color:rgba(196,176,138,.50)}
+
+.za-footer{border-top:1px solid rgba(255,255,255,.08);padding:34px 0 18px;background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.12))}
+.za-footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px}
+.za-footer p{margin:0 0 8px;color:var(--za-muted);line-height:1.6}
+.za-footer a{color:rgba(238,245,242,.90);text-decoration:none;border-bottom:1px solid rgba(163,139,99,.25)}
+.za-footer a:hover{border-bottom-color:rgba(196,176,138,.8)}
+.za-footer-bottom{width:min(var(--za-max),calc(100% - 40px));margin:18px auto 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.06);display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;color:rgba(238,245,242,.65);font-size:12px;letter-spacing:.03em}
+.za-sep{opacity:.6}
+
+.za-bottom-strip{
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background: rgba(10,18,16,.85);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(196,176,138,.20);
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px;
+  z-index: 9998;
+}
+.za-strip-btn{
+  text-decoration:none;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.04);
+  color: rgba(238,245,242,.92);
+  font-weight: 900;
+  letter-spacing: .02em;
+  transition: .2s;
+}
+.za-strip-btn:hover{transform: translateY(-1px); border-color: rgba(196,176,138,.45)}
+
+.za-toast{
+  position:fixed;left:50%;bottom:74px;transform:translateX(-50%) translateY(20px);
+  background:rgba(10,18,16,.85);border:1px solid rgba(196,176,138,.35);color:rgba(238,245,242,.95);
+  padding:12px 14px;border-radius:16px;box-shadow:0 18px 40px rgba(0,0,0,.35);
+  opacity:0;pointer-events:none;transition:.25s;max-width:min(520px,calc(100% - 30px));text-align:center;z-index:9999
+}
+
+@media (max-width: 960px){
+  .za-hero{grid-template-columns:1fr;padding-top:26px}
+  .za-form-wrap{grid-template-columns:1fr}
+  .za-footer-grid{grid-template-columns:1fr}
+  .za-links{display:none}
+  .za-burger{display:inline-block}
+  .za-nav.is-open .za-links{
+    display:flex;position:absolute;top:62px;right:20px;flex-direction:column;
+    background:rgba(15,38,34,.95);border:1px solid rgba(255,255,255,.10);
+    border-radius:16px;padding:10px;width:180px
+  }
+  .za-menu-content{grid-template-columns: 1fr}
+  .za-bottom-strip{flex-wrap:wrap}
+}
+
+/* Gallery clickable */
+.za-shot-btn{
+  all: unset;
+  display:block;
+  cursor: zoom-in;
+}
+.za-shot-btn:focus-visible{
+  outline: 2px solid rgba(196,176,138,.75);
+  outline-offset: 6px;
+  border-radius: 16px;
+}
+
+/* Modal */
+.za-modal{position:fixed;inset:0;z-index:10000;display:none}
+.za-modal[aria-hidden="false"]{display:block}
+.za-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.70);backdrop-filter:blur(6px)}
+.za-modal-panel{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(1100px,calc(100% - 24px));
+  height:min(92vh,900px);
+  background: rgba(15,38,34,.92);
+  border: 1px solid rgba(196,176,138,.22);
+  border-radius: 22px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.55);
+  overflow:hidden;
+}
+.za-modal-body{
+  position:absolute;inset:58px 18px 56px 18px;
+  display:flex;align-items:center;justify-content:center;
+}
+.za-modal-body img{
+  max-width:100%;
+  max-height:100%;
+  width:auto;height:auto;
+  border-radius: 16px;
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+}
+.za-modal-footer{
+  position:absolute;left:0;right:0;bottom:0;
+  height:56px;
+  display:flex;align-items:center;justify-content:center;
+  color: rgba(238,245,242,.78);
+  border-top:1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-size:12px;
+  font-weight:900;
+}
+.za-modal-close{
+  position:absolute;top:12px;right:12px;
+  width:42px;height:42px;border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.04);
+  color: rgba(238,245,242,.92);
+  cursor:pointer;
+  font-weight: 900;
+}
+.za-modal-close:hover{background: rgba(255,255,255,.08)}
+.za-modal-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:64px;border-radius:16px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.04);
+  color: rgba(238,245,242,.92);
+  cursor:pointer;
+  font-size:34px;
+  line-height:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.za-modal-nav:hover{background: rgba(255,255,255,.08)}
+.za-modal-prev{left:10px}
+.za-modal-next{right:10px}
+
+@media (max-width: 640px){
+  .za-modal-panel{height: 92vh}
+  .za-modal-body{inset: 58px 10px 56px 10px}
+  .za-modal-nav{width:40px;height:56px}
+}
+
+  
+/* Menü sayfaları: büyük, kaydırmalı, "sayfa" hissi */
+.za-menu-pages{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+  margin-top: 14px;
+}
+.za-menu-page{
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
+.za-page-frame{
+  width: min(980px, 100%);
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 22px;
+  padding: 14px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+}
+.za-page-frame img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius: 16px;
+}
+@media (max-width: 520px){
+  .za-page-frame{padding:10px;border-radius:18px}
+  .za-page-frame img{border-radius:14px}
+}
+
+
+/* ===== Modern Menü (Afiş / Board) ===== */
+.za-menu-modern{margin-top: 12px}
+.za-boards{display:flex;flex-direction:column;gap:28px}
+.za-board{
+  background:#1f3f36;
+  border:2px solid rgba(255,255,255,.70);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 26px 70px rgba(0,0,0,.45);
+}
+.za-board-top{
+  padding:26px 18px;
+  border-bottom:1px solid rgba(255,255,255,.55);
+  background:rgba(0,0,0,.06);
+}
+.za-board-title{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:26px;
+  letter-spacing:.55em;
+  font-weight:900;
+  text-transform:uppercase;
+  color:rgba(238,245,242,.95);
+}
+.za-emblem{
+  width:46px;height:46px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.55);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:950;
+  letter-spacing:.12em;
+  opacity:.9;
+}
+.za-board-body{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:0;
+}
+.za-board-col{
+  padding:18px 18px 20px;
+}
+.za-board-col-right{
+  border-left:1px solid rgba(255,255,255,.55);
+}
+.za-board-h{
+  margin:0 0 12px;
+  padding:10px 0;
+  font-size:22px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,.55);
+}
+.za-board-h small{
+  font-size:12px;
+  letter-spacing:.20em;
+  opacity:.85;
+}
+.za-mi{
+  display:flex;
+  align-items:baseline;
+  gap:12px;
+  padding:10px 0;
+}
+.za-mi-name{font-weight:850;letter-spacing:.02em}
+.za-mi-dots{
+  flex:1;
+  border-bottom:1px solid rgba(255,255,255,.40);
+  transform:translateY(-4px);
+}
+.za-mi-price{white-space:nowrap;font-weight:900;opacity:.95}
+.za-mi-sub{
+  margin:6px 0 0;
+  color:rgba(238,245,242,.78);
+  font-size:13px;
+  line-height:1.55;
+}
+.za-board-note{
+  margin:14px 0;
+  text-align:center;
+  color:rgba(238,245,242,.78);
+  font-style:italic;
+  letter-spacing:.02em;
+}
+.za-illus{
+  display:block;
+  max-width:100%;
+  height:auto;
+  opacity:.95;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.35));
+}
+.za-illus-bottom{
+  margin-top:18px;
+}
+.za-mt{margin-top:22px}
+.za-mt-sm{margin-top:10px}
+
+/* Tatlı sayfası: iki satır (üst + alt) */
+.za-board-body-split{
+  display:flex;
+  flex-direction:column;
+}
+.za-board-row{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+}
+.za-board-row + .za-board-row{
+  border-top:1px solid rgba(255,255,255,.55);
+}
+.za-board-illus-col{
+  border-left:1px solid rgba(255,255,255,.55);
+}
+.za-illus-side{
+  width:min(420px, 100%);
+  margin: 0 auto 14px;
+}
+.za-illus-text{
+  color:rgba(238,245,242,.82);
+  line-height:1.7;
+  font-size:14px;
+}
+.za-illus-text p{margin:0 0 10px}
+
+.za-board-foot{
+  padding:14px 12px;
+  text-align:center;
+  letter-spacing:.20em;
+  color:rgba(238,245,242,.85);
+  border-top:1px solid rgba(255,255,255,.55);
+  background:rgba(0,0,0,.05);
+}
+
+@media (max-width: 980px){
+  .za-board-title{letter-spacing:.35em;gap:16px}
+  .za-board-h{font-size:20px}
+}
+
+@media (max-width: 820px){
+  .za-board-body{grid-template-columns:1fr}
+  .za-board-col-right{border-left:none;border-top:1px solid rgba(255,255,255,.55)}
+  .za-board-row{grid-template-columns:1fr}
+  .za-board-illus-col{border-left:none;border-top:1px solid rgba(255,255,255,.55)}
+}
+
+@media (max-width: 520px){
+  .za-board{border-radius:18px}
+  .za-board-top{padding:20px 14px}
+  .za-emblem{width:42px;height:42px;border-radius:12px}
+  .za-board-h{font-size:18px;letter-spacing:.14em}
+  .za-mi{padding:9px 0}
+  .za-mi-sub{font-size:12px}
+}
+
+</style>
+</head>
+<body>
+  <div class="za-wrap">
+    <header class="za-header" id="top">
+      <div class="za-nav">
+        <a class="za-brand" href="#top" aria-label="Zeytin Ağacı Kafe">
+          <span class="za-dot"></span>
+          <span class="za-brand-text">ZEYTİN AĞACI</span>
+        </a>
+
+        <nav class="za-links" aria-label="Sayfa bağlantıları">
+          <a href="#menu">Menü</a>
+          <a href="#iletisim">İletişim</a>
+        </nav>
+
+        <button class="za-burger" type="button" aria-label="Menüyü aç/kapat" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <div class="za-hero">
+        <div class="za-hero-left">
+          <p class="za-kicker">Kurtköy’de sıcak bir durak</p>
+          <h1 class="za-title">Zeytin Ağacı Kafe</h1>
+          <p class="za-subtitle">
+            <strong>Bir fincanla başlar, iyi bir sohbete dönüşür:</strong>
+            burada kahve sadece içilmez; günün ritmi yavaşlar, fikirler yeşerir.
+          </p>
+
+          <div class="za-cta">
+            <a class="za-btn za-btn-primary" href="#menu">Menüyü Gör</a>
+            <a class="za-btn za-btn-ghost" href="#iletisim">İletişime Geç</a>
+          </div>
+
+          <div class="za-badges">
+            <span class="za-badge">Taze Demleme</span>
+            <span class="za-badge">Tatlı Kaçamaklar</span>
+            <span class="za-badge">Kahvaltı & Atıştırmalıklar</span>
+          </div>
+        </div>
+
+        <div class="za-hero-right">
+          <div class="za-logo-card">
+            <img class="za-logo" src="./assets/logo.jpg" alt="Zeytin Ağacı Kafe logosu" loading="eager" />
+            <p class="za-logo-caption">Kahve ile Başlar, Fikirle Büyür</p>
+          </div>
+        </div>
+      </div>
+
+      <canvas class="za-canvas" aria-hidden="true"></canvas>
+    </header>
+
+    <main>
+      <section class="za-section" id="menu">
+        <div class="za-container">
+          <div class="za-section-head">
+            <h2>Menü</h2>
+            
+          </div>
+
+          <div class="za-menu-modern">
+  <div class="za-boards">
+
+    <!-- SAYFA 1 -->
+    <article class="za-board" aria-label="Menü - Kahveler">
+      <div class="za-board-top">
+        <div class="za-board-title">
+          <span>Z E Y T İ N</span>
+          <span class="za-emblem" aria-hidden="true">ZA</span>
+          <span>A Ğ A C I</span>
+        </div>
+      </div>
+
+      <div class="za-board-body">
+        <div class="za-board-col">
+          <h3 class="za-board-h">ESPRESSO KLASİKLERİ</h3>
+
+          <div class="za-mi"><span class="za-mi-name">Espresso</span><span class="za-mi-dots"></span><span class="za-mi-price">130 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Double Espresso</span><span class="za-mi-dots"></span><span class="za-mi-price">150 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Espresso Macchiato</span><span class="za-mi-dots"></span><span class="za-mi-price">160 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Cortado</span><span class="za-mi-dots"></span><span class="za-mi-price">170 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Americano</span><span class="za-mi-dots"></span><span class="za-mi-price">160 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Latte</span><span class="za-mi-dots"></span><span class="za-mi-price">190 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Cappuccino</span><span class="za-mi-dots"></span><span class="za-mi-price">190 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Flat White</span><span class="za-mi-dots"></span><span class="za-mi-price">190 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Mocha</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">White Mocha</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Caramel Latte</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Strawberry Latte</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Vanillia Latte</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Hazelnut Latte</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Lotus Latte</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+
+          <img class="za-illus za-illus-bottom" src="./assets/illus-hot.png" alt="Kahve illüstrasyonu" loading="lazy" />
+        </div>
+
+        <div class="za-board-col za-board-col-right">
+          <h3 class="za-board-h">GELENEKSEL</h3>
+
+          <div class="za-mi"><span class="za-mi-name">Türk Kahvesi</span><span class="za-mi-dots"></span><span class="za-mi-price">120 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Double Türk Kahvesi</span><span class="za-mi-dots"></span><span class="za-mi-price">170 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Damla Sakızlı / Dibek</span><span class="za-mi-dots"></span><span class="za-mi-price">170 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Double Damla Sakızlı / Dibek</span><span class="za-mi-dots"></span><span class="za-mi-price">200 ₺</span></div>
+
+          <h3 class="za-board-h za-mt">DEMLEME</h3>
+
+          <div class="za-mi"><span class="za-mi-name">Filtre Kahve</span><span class="za-mi-dots"></span><span class="za-mi-price">150 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Sütlü Filtre Kahve</span><span class="za-mi-dots"></span><span class="za-mi-price">160 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">V60</span><span class="za-mi-dots"></span><span class="za-mi-price">220 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Buzlu Filtre Kahve</span><span class="za-mi-dots"></span><span class="za-mi-price">170 ₺</span></div>
+
+          <h3 class="za-board-h za-mt">SPESİYALLER <small>(ZEYTİNYAĞLI)</small></h3>
+
+          <div class="za-mi"><span class="za-mi-name">Coffolio</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Sütlü Coffolio</span><span class="za-mi-dots"></span><span class="za-mi-price">230 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Iced Sütlü Coffolio</span><span class="za-mi-dots"></span><span class="za-mi-price">250 ₺</span></div>
+        </div>
+      </div>
+
+      <div class="za-board-foot">Kahve ile başlar, fikirle büyür…</div>
+    </article>
+
+    <!-- SAYFA 2 -->
+    <article class="za-board" aria-label="Menü - Soğuk içecekler">
+      <div class="za-board-top">
+        <div class="za-board-title">
+          <span>Z E Y T İ N</span>
+          <span class="za-emblem" aria-hidden="true">ZA</span>
+          <span>A Ğ A C I</span>
+        </div>
+      </div>
+
+      <div class="za-board-body">
+        <div class="za-board-col">
+          <h3 class="za-board-h">SERİN DOKUNUŞLAR</h3>
+
+          <div class="za-mi"><span class="za-mi-name">Iced Americano</span><span class="za-mi-dots"></span><span class="za-mi-price">170 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Iced Latte</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Iced Flat White</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Iced Mocha</span><span class="za-mi-dots"></span><span class="za-mi-price">230 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Iced White Mocha</span><span class="za-mi-dots"></span><span class="za-mi-price">230 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Iced Caramel Latte</span><span class="za-mi-dots"></span><span class="za-mi-price">230 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Iced Strawberry Latte</span><span class="za-mi-dots"></span><span class="za-mi-price">230 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Iced Vanillia Latte</span><span class="za-mi-dots"></span><span class="za-mi-price">230 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Iced Hazelnut Latte</span><span class="za-mi-dots"></span><span class="za-mi-price">230 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Iced Lotus Latte</span><span class="za-mi-dots"></span><span class="za-mi-price">230 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Iced Caramel Macchiato</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Affogato</span><span class="za-mi-dots"></span><span class="za-mi-price">200 ₺</span></div>
+
+          <img class="za-illus za-illus-bottom" src="./assets/illus-cold.png" alt="Soğuk içecek illüstrasyonu" loading="lazy" />
+        </div>
+
+        <div class="za-board-col za-board-col-right">
+          <h3 class="za-board-h">KAHVE DIŞI MOLALAR</h3>
+
+          <div class="za-mi"><span class="za-mi-name">Çay</span><span class="za-mi-dots"></span><span class="za-mi-price">50 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Fincan Çay</span><span class="za-mi-dots"></span><span class="za-mi-price">65 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Kupa Çay</span><span class="za-mi-dots"></span><span class="za-mi-price">75 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Bitki Çayları</span><span class="za-mi-dots"></span><span class="za-mi-price">150 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Sıcak Çikolata</span><span class="za-mi-dots"></span><span class="za-mi-price">200 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Sıcak Beyaz Çikolata</span><span class="za-mi-dots"></span><span class="za-mi-price">200 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Salep</span><span class="za-mi-dots"></span><span class="za-mi-price">200 ₺</span></div>
+
+          <p class="za-board-note">( Anın tadına eşlik eden sıcaklık )</p>
+
+          <div class="za-mi"><span class="za-mi-name">Cool Lime</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Limonata</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Berry Hibiscus</span><span class="za-mi-dots"></span><span class="za-mi-price">210 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Churchill</span><span class="za-mi-dots"></span><span class="za-mi-price">150 ₺</span></div>
+
+          <p class="za-board-note">( Serin, canlı ve taze molalar… )</p>
+
+          <div class="za-mi"><span class="za-mi-name">Maden Suyu</span><span class="za-mi-dots"></span><span class="za-mi-price">60 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Su</span><span class="za-mi-dots"></span><span class="za-mi-price">35 ₺</span></div>
+        </div>
+      </div>
+
+      <div class="za-board-foot">Kahve ile başlar, fikirle büyür…</div>
+    </article>
+
+    <!-- SAYFA 3 -->
+    <article class="za-board" aria-label="Menü - Tatlılar">
+      <div class="za-board-top">
+        <div class="za-board-title">
+          <span>Z E Y T İ N</span>
+          <span class="za-emblem" aria-hidden="true">ZA</span>
+          <span>A Ğ A C I</span>
+        </div>
+      </div>
+
+      <div class="za-board-body za-board-body-split">
+        <div class="za-board-row">
+          <div class="za-board-col">
+            <h3 class="za-board-h">TATLI KAÇAMAKLAR / PASTRY <small>(EV YAPIMI / HOMEMADE)</small></h3>
+
+            <div class="za-mi"><span class="za-mi-name">Çikolatalı Brownie</span><span class="za-mi-dots"></span><span class="za-mi-price">290 ₺</span></div>
+            <div class="za-mi"><span class="za-mi-name">Karaorman Meyveli Brownie</span><span class="za-mi-dots"></span><span class="za-mi-price">300 ₺</span></div>
+            <div class="za-mi"><span class="za-mi-name">Beyaz Çikolatalı Brownie</span><span class="za-mi-dots"></span><span class="za-mi-price">310 ₺</span></div>
+            <div class="za-mi"><span class="za-mi-name">Antep Fıstıklı Cookie</span><span class="za-mi-dots"></span><span class="za-mi-price">275 ₺</span></div>
+            <div class="za-mi"><span class="za-mi-name">Fındıklı Cookie</span><span class="za-mi-dots"></span><span class="za-mi-price">265 ₺</span></div>
+            <div class="za-mi"><span class="za-mi-name">Red Velvet Cookie</span><span class="za-mi-dots"></span><span class="za-mi-price">285 ₺</span></div>
+            <div class="za-mi"><span class="za-mi-name">Karamelli Cookie</span><span class="za-mi-dots"></span><span class="za-mi-price">275 ₺</span></div>
+
+            <p class="za-board-note">( Dondurma ve çikolata sos ile servis edilir. )</p>
+          </div>
+
+          <div class="za-board-col za-board-illus-col">
+            <img class="za-illus za-illus-side" src="./assets/illus-dessert-a.png" alt="Tatlı illüstrasyonu" loading="lazy" />
+            <div class="za-illus-text">
+              <p>Tatlılarımızın tamamı kendi mutfağımızda, özenle seçilmiş kaliteli malzemelerle hazırlanır.</p>
+              <p>El emeği, dengeli lezzet ve zarif sunum… Her detayında özeni hissedin.</p>
+              <p><em>Afiyetle…</em></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="za-board-row za-board-row-bottom">
+          <div class="za-board-col">
+            <div class="za-mi"><span class="za-mi-name">Limonlu Cheesecake</span><span class="za-mi-dots"></span><span class="za-mi-price">310 ₺</span></div>
+            <div class="za-mi"><span class="za-mi-name">Frambuazlı Cheesecake</span><span class="za-mi-dots"></span><span class="za-mi-price">310 ₺</span></div>
+            <div class="za-mi"><span class="za-mi-name">Mozaik Pasta</span><span class="za-mi-dots"></span><span class="za-mi-price">235 ₺</span></div>
+            <div class="za-mi"><span class="za-mi-name">Çikolata Topu</span><span class="za-mi-dots"></span><span class="za-mi-price">340 ₺</span></div>
+            <div class="za-mi"><span class="za-mi-name">Elmalı Turta</span><span class="za-mi-dots"></span><span class="za-mi-price">240 ₺</span></div>
+            <div class="za-mi"><span class="za-mi-name">Fit Bar</span><span class="za-mi-dots"></span><span class="za-mi-price">120 ₺</span></div>
+          </div>
+
+          <div class="za-board-col za-board-illus-col">
+            <img class="za-illus za-illus-side" src="./assets/illus-dessert-b.png" alt="Cheesecake illüstrasyonu" loading="lazy" />
+            <p class="za-board-note">( Özel reçetemizle Fransız usulü… )</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="za-board-foot">Kahve ile başlar, fikirle büyür…</div>
+    </article>
+
+    <!-- SAYFA 4 -->
+    <article class="za-board" aria-label="Menü - Kahvaltı">
+      <div class="za-board-top">
+        <div class="za-board-title">
+          <span>Z E Y T İ N</span>
+          <span class="za-emblem" aria-hidden="true">ZA</span>
+          <span>A Ğ A C I</span>
+        </div>
+      </div>
+
+      <div class="za-board-body">
+        <div class="za-board-col">
+          <h3 class="za-board-h">KAHVALTI</h3>
+
+          <div class="za-mi"><span class="za-mi-name">Kahvaltı Tabağı</span><span class="za-mi-dots"></span><span class="za-mi-price">450 ₺</span></div>
+          <p class="za-mi-sub">Sahanda Yumurta, Kaşar, Cheddar Peyniri, Beyaz Peynir, Simit, Siyah Zeytin, Yeşil Zeytin, Tereyağı, Reçel, Bal, Nutella, Kahvaltılık Sos, Mini Salata, Sucuk, Ekmek, Çay</p>
+
+          <div class="za-mi za-mt-sm"><span class="za-mi-name">Serpme Kahvaltı (2 Kişilik)</span><span class="za-mi-dots"></span><span class="za-mi-price">1100 ₺</span></div>
+          <p class="za-mi-sub">Sahanda Yumurta, Peynir Tabağı (Top, Örgü, Beyaz, Kaşar, Cheddar), Zeytinyağı, Patates Kızartması, Meze, Biber, Sigara Böreği, Hindi Füme, Simit, Siyah Zeytin, Yeşil Zeytin, Tereyağı, Reçel, Bal, Nutella, Kahvaltılık Sos, Mini Salata, Sucuk, Ekmek, Sınırsız Çay</p>
+          <p class="za-board-note">( Ekstra çay bardağı 50₺ )</p>
+
+          <h3 class="za-board-h za-mt">EKSTRALAR</h3>
+
+          <div class="za-mi"><span class="za-mi-name">Sahanda Yumurta</span><span class="za-mi-dots"></span><span class="za-mi-price">95 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Sahanda Sucuklu Yumurta</span><span class="za-mi-dots"></span><span class="za-mi-price">165 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Menemen</span><span class="za-mi-dots"></span><span class="za-mi-price">155 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Kaşarlı Menemen</span><span class="za-mi-dots"></span><span class="za-mi-price">175 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Patates Kızartması</span><span class="za-mi-dots"></span><span class="za-mi-price">145 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Pişi Porsiyon (2 adet)</span><span class="za-mi-dots"></span><span class="za-mi-price">80 ₺</span></div>
+          <div class="za-mi"><span class="za-mi-name">Sigara Böreği (2 adet)</span><span class="za-mi-dots"></span><span class="za-mi-price">70 ₺</span></div>
+        </div>
+
+        <div class="za-board-col za-board-col-right">
+          <h3 class="za-board-h">TOSTLAR</h3>
+
+          <div class="za-mi"><span class="za-mi-name">Kaşarlı Tost</span><span class="za-mi-dots"></span><span class="za-mi-price">180 ₺</span></div>
+          <p class="za-mi-sub">Kaşar, Cheddar Peyniri</p>
+
+          <div class="za-mi za-mt-sm"><span class="za-mi-name">Karışık Tost</span><span class="za-mi-dots"></span><span class="za-mi-price">215 ₺</span></div>
+          <p class="za-mi-sub">Kaşar, Cheddar Peyniri, Sucuk</p>
+
+          <h3 class="za-board-h za-mt">BAGEL SANDVİÇLER</h3>
+
+          <div class="za-mi"><span class="za-mi-name">Bagel Hindi Füme</span><span class="za-mi-dots"></span><span class="za-mi-price">230 ₺</span></div>
+          <p class="za-mi-sub">Krem Peynir, Kaşar, Cheddar Peyniri, Hindi Füme</p>
+
+          <div class="za-mi za-mt-sm"><span class="za-mi-name">Bagel Üç Peynirli</span><span class="za-mi-dots"></span><span class="za-mi-price">190 ₺</span></div>
+          <p class="za-mi-sub">Krem Peynir, Kaşar, Cheddar Peyniri</p>
+
+          <div class="za-mi za-mt-sm"><span class="za-mi-name">Bagel Guacamole Soslu</span><span class="za-mi-dots"></span><span class="za-mi-price">230 ₺</span></div>
+          <p class="za-mi-sub">Avokado Sos, Kaşar, Cheddar, Domates</p>
+
+          <h3 class="za-board-h za-mt">ATIŞTIRMALIK</h3>
+
+          <div class="za-mi"><span class="za-mi-name">Combo Sepeti</span><span class="za-mi-dots"></span><span class="za-mi-price">400 ₺</span></div>
+          <p class="za-mi-sub">Patates Kızartması (2 porsiyon), Nugget (4 adet), Sosis (4 adet), Soğan Halkası (4 adet), Sigara Böreği (2 adet)</p>
+        </div>
+      </div>
+
+      <div class="za-board-foot">Kahve ile başlar, fikirle büyür…</div>
+    </article>
+
+  </div>
+</div></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="za-footer" id="iletisim">
+      <div class="za-container za-footer-grid">
+        <div>
+          <h3>Zeytin Ağacı Kafe</h3>
+          <p>Kahve ile başlar, fikirle büyür.</p>
+        </div>
+
+        <div>
+          <h4>İletişim</h4>
+          <p><a href="tel:+905445375882">0544 537 58 82</a></p>
+          <p><a href="tel:+905376130369">0537 613 03 69</a></p>
+          <p><a href="mailto:kurtkoyzeytinagacikafe@gmail.com">kurtkoyzeytinagacikafe@gmail.com</a></p>
+        </div>
+
+        <div>
+          <h4>Hızlı Linkler</h4>
+          <p><a href="#menu">Menü</a></p>
+          <p><a href="#top">Yukarı</a></p>
+        </div>
+      </div>
+
+      <div class="za-footer-bottom">
+        <span>© <span id="zaYear"></span> Zeytin Ağacı Kafe</span>
+        <span class="za-sep">•</span>
+        <span>Tüm fiyatlar ₺ cinsindendir.</span>
+      </div>
+    </footer>
+
+    <div class="za-bottom-strip" aria-label="İletişim kısayolları">
+      <a class="za-strip-btn" href="tel:+905445375882">Ara: 0544 537 58 82</a>
+      <a class="za-strip-btn" href="tel:+905376130369">Ara: 0537 613 03 69</a>
+      <a class="za-strip-btn" href="mailto:kurtkoyzeytinagacikafe@gmail.com">E-posta</a>
+    </div>
+</div>
+
+  <script>
+(() => {
+  // Footer year
+  const yearEl = document.getElementById("zaYear");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Mobile menu
+  const nav = document.querySelector(".za-nav");
+  const burger = document.querySelector(".za-burger");
+  if (nav && burger) {
+    burger.addEventListener("click", () => {
+      const open = nav.classList.toggle("is-open");
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    nav.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", () => {
+        nav.classList.remove("is-open");
+        burger.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener("click", (e) => {
+      const id = a.getAttribute("href");
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  // Canvas blobs
+  const canvas = document.querySelector(".za-canvas");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let w = 0, h = 0;
+  const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+
+  const blobs = Array.from({ length: 10 }, (_, i) => ({
+    x: Math.random(), y: Math.random(),
+    r: 0.10 + Math.random() * 0.20,
+    vx: (Math.random() - 0.5) * 0.0008,
+    vy: (Math.random() - 0.5) * 0.0008,
+    a: 0.10 + Math.random() * 0.14,
+    gold: i % 3 === 0
+  }));
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    w = Math.floor(rect.width);
+    h = Math.floor(rect.height);
+    canvas.width = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+
+    const vign = ctx.createRadialGradient(w * 0.5, h * 0.3, 0, w * 0.5, h * 0.3, Math.max(w, h));
+    vign.addColorStop(0, "rgba(0,0,0,0)");
+    vign.addColorStop(1, "rgba(0,0,0,0.25)");
+    ctx.fillStyle = vign;
+    ctx.fillRect(0, 0, w, h);
+
+    for (const b of blobs) {
+      b.x += b.vx; b.y += b.vy;
+      if (b.x < -0.2) b.x = 1.2;
+      if (b.x > 1.2) b.x = -0.2;
+      if (b.y < -0.2) b.y = 1.2;
+      if (b.y > 1.2) b.y = -0.2;
+
+      const cx = b.x * w, cy = b.y * h;
+      const rr = b.r * Math.min(w, h);
+
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rr);
+      if (b.gold) {
+        g.addColorStop(0, `rgba(163,139,99,${b.a})`);
+        g.addColorStop(1, "rgba(163,139,99,0)");
+      } else {
+        g.addColorStop(0, `rgba(255,255,255,${b.a * 0.22})`);
+        g.addColorStop(1, "rgba(255,255,255,0)");
+      }
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(cx, cy, rr, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener("resize", resize, { passive: true });
+  resize();
+  draw();
+})();
+</script>
+</body>
+</html>
