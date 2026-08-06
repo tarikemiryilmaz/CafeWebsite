@@ -62,7 +62,7 @@ gidiyor — bunları değiştirmenize gerek yok, ama haritanın doğru konumu
 gösterdiğini yayına almadan önce bir kontrol etmenizi öneririz.
 
 ## Uyumluluk
-
+Deployment update
 - Mobil, tablet ve masaüstünde test edilmiş responsive breakpoint'ler
   (480px / 760px / 900px / 1080px) içerir.
 - `prefers-reduced-motion` desteklenir (animasyonları azaltan kullanıcılar
